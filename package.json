@@ -1,9 +1,9 @@
 {
   "name": "hindu-numerals",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A library to convert hindu numerals to arabic and vice versa",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "files": [
     "/dist"
   ],
