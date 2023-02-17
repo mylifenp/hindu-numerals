@@ -1,4 +1,4 @@
-const hinduNumeralMap = new Map<string, number>([
+const hinduNumeralMap: ReadonlyMap<string, number> = new Map<string, number>([
   ["०", 0],
   ["१", 1],
   ["२", 2],
@@ -11,46 +11,32 @@ const hinduNumeralMap = new Map<string, number>([
   ["९", 9],
 ]);
 
-const arabicNumeralMap = new Map<number, string>([
-  [0, "०"],
-  [1, "१"],
-  [2, "२"],
-  [3, "३"],
-  [4, "४"],
-  [5, "५"],
-  [6, "६"],
-  [7, "७"],
-  [8, "८"],
-  [9, "९"],
+const arabicNumeralMap: ReadonlyMap<string, string> = new Map<string, string>([
+  ["0", "०"],
+  ["1", "१"],
+  ["2", "२"],
+  ["3", "३"],
+  ["4", "४"],
+  ["5", "५"],
+  ["6", "६"],
+  ["7", "७"],
+  ["8", "८"],
+  ["9", "९"],
 ]);
 
-const convertToHinduOrLeave = (n: string) => {
-  const val = parseInt(n, 10);
-  if (isNaN(val)) {
-    return n;
-  }
-  return arabicNumeralMap.get(val);
-};
+const convertToHinduOrLeave = (n: string) =>
+  arabicNumeralMap.has(n) ? arabicNumeralMap.get(n) : n;
 
-const convertToArabicOrLeave = (n: string) => {
-  const val = hinduNumeralMap.get(n);
-  if (typeof val === "undefined") {
-    return n;
-  }
-  return val;
-};
+const convertToArabicOrLeave = (n: string) =>
+  hinduNumeralMap.has(n) ? hinduNumeralMap.get(n) : n;
 
 export const toHinduNumerals = (num: string | number): string => {
   if (typeof num === "number") {
-    try {
-      return num
-        .toString()
-        .split("")
-        .map((n) => convertToHinduOrLeave(n))
-        .join("");
-    } catch (err) {
-      throw new Error(`${err.message}`);
-    }
+    return num
+      .toString()
+      .split("")
+      .map((n) => convertToHinduOrLeave(n))
+      .join("");
   } else {
     return num
       .split("")
